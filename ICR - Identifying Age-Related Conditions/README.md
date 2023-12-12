@@ -45,8 +45,23 @@ When merging Greeks, instead of Alpha: A, Beta: B, Gamma: C, Delta: D, I convert
 Merged_Greeks: ABCD format, and after merging, use LabelEncoder to label them, and then right-merge them into the train dataset to be included in X for model training.
 → The reason for doing this is that I thought it would be better to treat the combination of Greek letters for each patient as a group instead of the relationship between each Greek letter.
 
-What I overlooked here is that all the column information in the Test Dataset was 0.0, so without any suspicion, I simply created a Merged_Greeks column in the Test Dataset, zooming all values to 0.0.
-Also, the Alpha and Gamma Columns in the Greeks Dataset are just a refinement of the Class information in the Train Dataset, so the CV Score is below 0.1 for most models.
+What I overlooked here is that all the column information in the Test Dataset was 0.0, so without any suspicion, I simply created a Merged_Greeks column in the Test Dataset, zooming all values to 0.0.<br>
+Also, the Alpha and Gamma Columns in the Greeks Dataset are just a refinement of the Class information in the Train Dataset, so the CV Score is below 0.1 for most models.<br>
+<p align="center">
+    <img width="250" alt="image" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/8fb7aff8-a137-4ee9-b106-21abbfc59051/c4812fc5-219e-4773-ac50-84130e2f9019/Untitled.png">
+</p>
+Although this was a mistake-filled attempt, it led to the realization that we should use the Greeks information to predict the Test Dataset, a realization that has been a cornerstone of our current direction.<br><br>
+Multiple method failures and direction beyond the project period:<br>
+→ In addition to the LB 3.22 case described above, there were various failure cases.<br>
+There were cases where the LB score did not improve despite adjusting detailed parameter values under the same conditions such as scaling method and model used, so the team introduced and tried new models such as TabPFN and Autogluon compared to the existing models utilized within the team.<br>
+Autogluon yielded similar or poor LB scores.<br>
+TabPFN yielded the best LB Score so far, 0.16, using the method Mr. HeeYoung tried.<br><br>
+
+→ Not a failure yet, but am working on a Rule-Based model(?) based on Greeks.
+Not utilizing ML/DL model, relying strictly on EDA to find the rules.<br>
+(As of this comment) There is a small chance of success in the two days left in the project period, but I think it's worth a try since we have time until the competition ends in mid-August.<br><br>
+
+→ In addition to using SHAP Value, we will also try various techniques such as PseudoLabeling by actively utilizing the Greeks Dataset, which the team did not see much value in using.<br>
 
 ## Throwback
 This was the first group work I have done as a Data Scientist.<br>
