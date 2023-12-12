@@ -132,3 +132,13 @@ MCRMSE=\frac{1}{N_t} \sum_{j=1}^{N_t}\left(\frac{1}{n} \sum_{i=1}^n\left(y_{i j}
   | bart-large | albert-large-v2 |
 
 </div>
+
+  #### T5 & BART
+
+- I have tried all the non-large models above, but BART & T5.<br>When I tried to implement BART and T5 as I have done for other models, a large number of error messages occurred.<br>Later, I learned from the T5 research paper that unlike other encoder-only models listed above, T5 is an encoder-decoder model, and so is BART.<br>Therefore, I had to construct from scratch.
+However, when I realized that I had to build a new set of code, it was already 3 days to the deadline, I could only give up using BART and T5 for this time.
+
+- For other models than BART and T5, I have built a list to store the model location and retrieved the model's name & location within the training & infer code structure I used for DeBERTa-v3-Base.
+- I understand that it wouldn’t be the best way to try out multiple models in a single structure, but as aforementioned, I did not have enough time to build again from ground zero.
+- After several experiments on Google Colab, I have figured out that `DistilRoBERTa-base` scored the best amongst the models.
+- Therefore, I have selected the DistilRoBERTa-version of the notebooks as one of my final submission.
