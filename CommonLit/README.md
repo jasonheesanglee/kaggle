@@ -54,7 +54,7 @@ MCRMSE=\frac{1}{N_t} \sum_{j=1}^{N_t}\left(\frac{1}{n} \sum_{i=1}^n\left(y_{i j}
 
 ## Preprocessing
 
-###Text Cleansing
+### Text Cleansing
 - Cleansing the text is a must to run the NLP model effectively.
 - I first brought the `text_processor` module I composed while working on the previous competition.<br>It includes:
   - Regex pattern to replace all the words in all forms of brackets.
