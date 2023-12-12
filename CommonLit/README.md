@@ -161,5 +161,17 @@ However, when I realized that I had to build a new set of code.<br>As it was alr
   <img width="800" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/33ab8dcd-b84b-43ac-8a5e-2cd629df4e16">
 </p>
 
+## Result & Relection
+- I have teamed up with the study-group members who study NLP together.<br>As we were placed at the top 143 in the Public Leaderboard, we believed that we could make it to the Bronze medal when the Private Leaderboard was published.<br>Therefore, we tried our best until the very end to make minor changes to our existing solution.
+  <img width="1140" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/2eb58c4d-5e2a-4961-8cff-3942786f052d">
+- When the Private Leaderboard was published, we were pretty shocked with the result.
+  <img width="1139" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/a7bd18c5-4de0-4c8d-bcdf-38a59645f668">
+- We were expecting at least the top 170, which is the lower limit for the bronze medal.<br>After being depressed for 30 minutes, we started analyzing what have we done wrong.<br>There were quite some reasons we have detected.
 
-
+- **First** : The proportion of the Public Data.The organizer stated that the test data provided to the competitors is only 13% of the whole test data.<br>Overfitting was unavoidable as we focused on getting a better score on the Public Leaderboard.
+  <p align="center">
+    <img width="872" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/edf067d2-f3b3-4523-bc73-24d1a9268ddf">
+  </p>
+- **Second** : Using SymSpellPy for spellchecking.<br>I wouldn’t say this is totally wrong, but most competitors used PySpellCheck and AutoCorrect.<br>It was mainly AutoCorrect.
+- **Third** : Focused too much on MobileBERT.<br>This is more likely to a self-reflection.<br>I have spent about 2 weeks implementing MobileBERT.<br>Obviously, it has been a great practice for me, but that was it.<br>It didn’t help in scoring.
+- **Fourth** : Need more and better modeling techniques.<br>It would have been better if we could also try T5 and BART, as no one else was trying that measure.<br>Only if we had a better modeling technique, we could have also tried these two models.
