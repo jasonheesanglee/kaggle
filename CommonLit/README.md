@@ -87,3 +87,29 @@ MCRMSE=\frac{1}{N_t} \sum_{j=1}^{N_t}\left(\frac{1}{n} \sum_{i=1}^n\left(y_{i j}
   | AutoCorrect | 15 words | 12 words | 2 words | 1 name |
 
 </div>
+
+### Masking
+- After reading some BERT-related research papers and watching videos about Natural Language Processing, I have learned that masking was a huge part of dealing with Natural Language data.
+- When I tried to implement masking, I found that the tokens used for masking differed from model to model, although most of the models I tried were BERT-descendants.<br>Therefore, I decided only to include masking when using `debertav3base`.
+- I have separated the masking module into two and let each module mask Keywords and Frequently-appeared words.
+- However, when I asked for feedback from the Kaggle community, they told me that masking doesn’t work this way.
+- Then, I tried to learn more and implemented in the other code, which I will introduce later in this document.
+
+## Train & Infer
+
+### MobileBERT
+- As the purpose of this competition is to enhance the teaching and scoring experience of the teachers, I believed making this model lightweight is the key.<br>By implementing MobileBERT, the model would run on individual mobile devices; teachers at isolated locations with poor or no internet connection could also use this.<br>It would not need a simultaneous connection to the internet.
+- Unfortunately, I had to bring a training code from the community, as the one I composed didn’t run successfully.
+- When learning about Deep Learning modeling, one thing I learned was that, in many cases, it is better to have more data for the model to train on.
+- Therefore, for the occasions where I turned the spellchecking module on, I made the model to be trained on the non-spellchecked data and the spellchecked data.<br>Which later, I found out that this tactic made the model overfitted to the training data.
+- However, by doing so, I had a chance to look closer into the codes and to understand the logic.
+- Then, I tried to implement MobileBERT to the code by simply changing the name of the model in `.from_pretrained()`, but it was giving an out-of-range Public LB score.<br><br>
+
+  #### Knowledge Distilation
+- I realized something wrong when I saw the score and thought this is not the way how MobileBERT is implemented in the code.
+- I read the research paper of MobileBERT to find the solution.<br>Then, I realized that a teacher model needed to be taught before implementing MobileBERT, and the teacher model needs to teach MobileBERT.
+- At first, I didn’t really understand the logic behind it.<br>Still, then I realized that the teacher model was the one containing the information, and MobileBERT only took the necessary information from the previous model (teacher model).
+- The Public Leaderboard score after properly implementing the MobileBERT has been better than before, but it was still unsatisfying.<br>Which led me to revert back to other BERT-descendant models.
+<p align="center">
+  <img width="700" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/5377adc4-4796-438e-95c1-4d95f5b6b155">
+</p>
