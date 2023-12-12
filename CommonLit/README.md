@@ -139,8 +139,5 @@ MCRMSE=\frac{1}{N_t} \sum_{j=1}^{N_t}\left(\frac{1}{n} \sum_{i=1}^n\left(y_{i j}
 However, when I realized that I had to build a new set of code.<br>As it was already 3 days to the deadline, and I could only give up using BART and T5 for this time.
 
   #### All the other encoder-only models.
-- For other models than BART and T5, I have built a list to store the model location and, retrieved the model's name & location within the train & infer code structure I used for DeBERTa-v3-Base.
-- I understand that it wouldn’t be the best way to try out multiple models in a single structure, but as aforementioned, I did not have enough time to build again from ground zero.
-- After several experiments on Google Colab, I have figured out that `DistilRoBERTa-base` scored the best among the models.
-- Therefore, I have selected the DistilRoBERTa-version of the notebooks as one of my final submissions.
+- For other models than BART and T5, I have built a list to store the model location and, retrieved the model's name & location within the train & infer code structure I used for DeBERTa-v3-Base.<br>I understand that it wouldn’t be the best way to try out multiple models in a single structure, but as aforementioned, I did not have enough time to build again from ground zero.<br>After several experiments on Google Colab, I have figured out that `DistilRoBERTa-base` scored the best among the models.<br>Therefore, I have selected the DistilRoBERTa-version of the notebooks as one of my final submissions.
   
