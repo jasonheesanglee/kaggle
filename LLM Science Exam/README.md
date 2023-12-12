@@ -57,25 +57,40 @@ etc.
   > *Similar observations have been made in prior work, e.g. Beltagy et al. (2019) found that pre-training BERT on text from research papers improved its performance on scientific tasks.
   > The main lesson behind these findings is that pre-training on in-domain unlabeled data can improve performance on downstream tasks.*
   
-Combining these two points, I decided to crawl scientific research paper, generate set of questions and answers to use as additional training data.<br>
-After a bit of research on discussion section of the competition, I realized that there are already some dataset that other people have created.<br>
-As I was unfamiliar of generating question & answers from plain text, I decided to use their dataset.<br>
+- Combining these two points, I decided to crawl scientific research paper, generate set of questions and answers to use as additional training data.<br>After a bit of research on discussion section of the competition, I realized that there are already some dataset that other people have created.<br>As I was unfamiliar of generating question & answers from plain text, I decided to use their dataset.<br>
 
-I have found `DeBERTa` has become popular among the competitors in another ongonig competition CommonLit- Evaluating Students Summary, and therefore I have also tried to implement it here.<br>
-
-There are few versions for DeBERTa and they are :<br>
+### `DeBERTA`
+- I have found `DeBERTa` has become popular among the competitors in another ongonig competition CommonLit- Evaluating Students Summary, and therefore I have also tried to implement it here.<br><br>
+  There are few versions for DeBERTa and they are :<br>
 - `deberta-base`
 - `deberta-xlarge-mnli`
 - `deberta-v2-xxlarge`
 - `deberta-v3-small`
 - `deberta-v3-base`
 - `deberta-v3-large`
-Among these models, I decided to go with `deberta-v3-base` and `deberta-v3-large`.<br>
-This decision was made very simply, I wanted to use the latest model.<br>
-<br>
 
-I have first started with `deberta-v3-large` but unfortunately the notebook kept threw either `Out of Memory Error` or `Notebook Timeout Error`.<br>
+  Among these models, I decided to go with `deberta-v3-base` and `deberta-v3-large`.<br>
+  This decision was made very simply, I wanted to use the latest model.<br><br>
+
+- I have first started with `deberta-v3-large` but unfortunately the notebook kept threw either `Out of Memory Error` or `Notebook Timeout Error`.<br>
 After the failure of the first attempt with `deberta-v3-large`, I tried my best to figure out why it was throwing exception.<br>
 I tried to modify all those hyperparameters, number of layers and etc.<br>
 Later found out that the model was to large that it wouldn’t finish the task within 9 hours (even with the GPU).<br>
 Therefore I had to go with `deberta-v3-base` and it worked great up to max_length = 384, `batch_size = 32`, `num_sentences_include = 20` and `filter_len = 20`.<br>
+
+### RAG
+- After going through others’ notebooks, I learned that the point was on **RAG, Retrieval Augmented Generation**.<br><br>
+
+- Based on one [website](https://www.promptingguide.ai/techniques/rag) that explains about RAG, LLM does not require additional background knowledge to achieve common tasks like sentiment analysis and named entity recognition.<br>However, LLM also need to learn the knowledge from external source to solve complex problems, like Science Exams, based on fact without hallucination.<br><br>
+
+- **RAG** combines the information retrieval component with a text generator model.<br>
+**RAG** can be fine-tuned and its internal knowledge can be modified in an efficient manner and without needing retraining of entire model.<br>
+It takes an input and retrieves a set of relevent/supporting documents given a source (e.g. Wikipedia).<br>
+The documents are concatenated as context with the original input prompt and fed to the text generator which produces the final output.<br>
+This makes RAG adaptive for situations where facts could evolve overtime.<br>
+This is very useful as LLMs’s parametric knowledge is static.<br>
+RAG allows language models to bypass retraining, enabling access to the latest information for generating reliable outputs via retrieval-based generation.<br><br>
+
+Below is the overview of how the approach works.<br>
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/8fb7aff8-a137-4ee9-b106-21abbfc59051/1218501e-5caa-44f4-847b-32b448651be5/Untitled.png)
