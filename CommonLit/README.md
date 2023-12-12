@@ -105,7 +105,7 @@ MCRMSE=\frac{1}{N_t} \sum_{j=1}^{N_t}\left(\frac{1}{n} \sum_{i=1}^n\left(y_{i j}
 - However, by doing so, I had a chance to look closer into the codes and to understand the logic.
 - Then, I tried to implement MobileBERT to the code by simply changing the name of the model in `.from_pretrained()`, but it was giving an out-of-range Public LB score.<br><br>
 
-  #### Knowledge Distilation
+#### Knowledge Distilation
 - I realized something wrong when I saw the score and thought this is not the way how MobileBERT is implemented in the code.
 - I read the [research paper of MobileBERT](https://arxiv.org/pdf/2004.02984.pdf) to find the solution.<br>Then, I realized that a teacher model needed to be taught before implementing MobileBERT, and the teacher model needs to teach MobileBERT.
 - At first, I didn’t really understand the logic behind it.<br>Still, then I realized that the teacher model was the one containing the information, and MobileBERT only took the necessary information from the previous model (teacher model).
@@ -133,11 +133,10 @@ MCRMSE=\frac{1}{N_t} \sum_{j=1}^{N_t}\left(\frac{1}{n} \sum_{i=1}^n\left(y_{i j}
 
 </div>
 
-  #### BART & T5
-
+#### BART & T5
 - I have tried all the non-large models above, but BART & T5.<br>When I tried to implement BART and T5 as I have done for other models, a large number of error messages occurred.<br>Later, I learned from the T5 research paper that unlike other encoder-only models listed above, T5 is an encoder-decoder model, and so is BART.<br>Therefore, I had to construct from scratch.
 However, when I realized that I had to build a new set of code.<br>As it was already 3 days to the deadline, and I could only give up using BART and T5 for this time.
 
-  #### All the other encoder-only models.
+#### All the other encoder-only models.
 - For other models than BART and T5, I have built a list to store the model location and, retrieved the model's name & location within the train & infer code structure I used for DeBERTa-v3-Base.<br>I understand that it wouldn’t be the best way to try out multiple models in a single structure, but as aforementioned, I did not have enough time to build again from ground zero.<br>After several experiments on Google Colab, I have figured out that `DistilRoBERTa-base` scored the best among the models.<br>Therefore, I have selected the DistilRoBERTa-version of the notebooks as one of my final submissions.
   
