@@ -91,6 +91,29 @@ This makes RAG adaptive for situations where facts could evolve overtime.<br>
 This is very useful as LLMs’s parametric knowledge is static.<br>
 RAG allows language models to bypass retraining, enabling access to the latest information for generating reliable outputs via retrieval-based generation.<br><br>
 
-Below is the overview of how the approach works.<br>
+    Below is the overview of how the approach works.<br>
+    <p align="center">
+      <img width="1000" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/2b50e067-fbb0-4ef4-b6ac-44982e351975">
+    </p>
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/8fb7aff8-a137-4ee9-b106-21abbfc59051/1218501e-5caa-44f4-847b-32b448651be5/Untitled.png)
+### LLM
+The competition has ended, and below is my throwback.<br><br>
+
+These tryouts with BERT descendant models didn’t make great result.<br>
+Therefore, I decided to tryout the LLM models as the competition title pointed out.<br><br>
+
+Pure LLaMa2, without any pre-training, was my first target.<br>
+It is obvious now that it wouldn’t work well, however I didn’t know about it well then.<br>
+I struggled learning about the model, tried to implement it for the task, it gave the score only around `0.3`. Which was worse than the `deberta` tryouts (around `0.7`).<br><br>
+
+Then, I decided to try Mistral 7B after checking a recent news that this was a brand new LLM.<br>
+This gave me a good result (`0.853`), but it I was still not enough to reach the **medal-range**.<br><br>
+
+Then I tried with `Platypus2`  for the last week of the competition, which other competitions were trying with.<br>
+This gave me `0.874`, the best result out of all the tryouts I have done.
+
+#### Public LeaderBoard - 15%
+<img width="1135" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/2ffdcfc1-f320-46e1-9d4a-108c7cf54ea9">
+
+#### Private LeaderBoard - 15%
+<img width="1140" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/177fd88f-5de6-4779-80e1-55b30d8d78b0">
