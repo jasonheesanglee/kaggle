@@ -21,10 +21,61 @@ The Kaggle environment provides a unique lens to study this as submissions are s
 If a question-answering model can ace a test written by a question-writing model more than 10 times its size, this would be a genuinely interesting result; on the other hand if a larger model can effectively stump a smaller one, this has compelling implications on the ability of LLMs to benchmark and test themselves.<br>
 
 ### Evaluation
-Submissions are evaluated according to the Mean Average Precision @ 3 (MAP@3):<br>
+- Submissions are evaluated according to the Mean Average Precision @ 3 (MAP@3):<br>
 ```math
 MAP @ 3=\frac{1}{U} \sum_{u=1}^U \sum_{k=1}^{\min (n, 3)} P(k) \times rel(k)
 ```
-where 𝑈 is the number of questions in the test set, 𝑃(𝑘) is the precision at cutoff 𝑘, 𝑛 is the number predictions per question, and 𝑟𝑒𝑙(𝑘) is an indicator function equaling 1 if the item at rank 𝑘 is a relevant (correct) label, zero otherwise.
+- where 𝑈 is the number of questions in the test set, 𝑃(𝑘) is the precision at cutoff 𝑘, 𝑛 is the number predictions per question, and 𝑟𝑒𝑙(𝑘) is an indicator function equaling 1 if the item at rank 𝑘 is a relevant (correct) label, zero otherwise.<br>
+- Once a correct label has been scored for an individual question in the test set, that label is no longer considered relevant for that question, and additional predictions of that label are skipped in the calculation.<br>For example, if the correct label is `A` for an observation, the following predictions all score an average precision of `1.0`.
+```
+[A, B, C, D, E]
+[A, A, A, A, A]
+[A, B, A, C, A]
+```
 
-Once a correct label has been scored for an individual question in the test set, that label is no longer considered relevant for that question, and additional predictions of that label are skipped in the calculation. For example, if the correct label is `A` for an observation, the following predictions all score an average precision of `1.0`.
+### Submission File
+For each `id` in the test set, you may predict up to 3 labels for your `prediction`.<br>
+The file should contain a header and have the following format:<br>
+```
+id, prediction
+0, A B C
+1, B C A
+2, C A B
+etc.
+```
+
+## Approach
+- To perform better on the competitions, the first thing I have done was to take a look on others’ work.<br><br>
+- After going through around 30 notebooks, I realized that many of them were using `T5` as their Main Deep Learning model.<br>
+  Then, I found the [research paper on T5](https://arxiv.org/pdf/1910.10683.pdf) from `arxiv` and started going through it.
+- While going through the paper, I could understand how this model work and why people chose this model as their main model.<br>
+  According to the paper, this model was designed to perform Text-to-Text tasks as an encoder-decoder model, unlikely to the previous model `BERT`, which was an encoder-only model.<br>
+  One of the point the researchers pointed out on their paper was that using data from Wikipedia increased the performance on Question Answering tasks.<br>
+  > *As a final example, using data from Wikipedia produced significant (but less dramatic) gains on SQuAD, which is a question-answering data set with passages sourced from Wikipedia.*
+  
+  Moreover, they mentioned that in the previous research on BERT, pre-training the model with research papers increased performance on scientific tasks.
+  > *Similar observations have been made in prior work, e.g. Beltagy et al. (2019) found that pre-training BERT on text from research papers improved its performance on scientific tasks.
+  > The main lesson behind these findings is that pre-training on in-domain unlabeled data can improve performance on downstream tasks.*
+  
+Combining these two points, I decided to crawl scientific research paper, generate set of questions and answers to use as additional training data.<br>
+After a bit of research on discussion section of the competition, I realized that there are already some dataset that other people have created.<br>
+As I was unfamiliar of generating question & answers from plain text, I decided to use their dataset.<br>
+
+I have found `DeBERTa` has become popular among the competitors in another ongonig competition CommonLit- Evaluating Students Summary, and therefore I have also tried to implement it here.<br>
+
+There are few versions for DeBERTa and they are :<br>
+- `deberta-base`
+- `deberta-xlarge-mnli`
+- `deberta-v2-xxlarge`
+- `deberta-v3-small`
+- `deberta-v3-base`
+- `deberta-v3-large`
+Among these models, I decided to go with `deberta-v3-base` and `deberta-v3-large`.<br>
+This decision was made very simply, I wanted to use the latest model.<br>
+<br>
+
+I have first started with `deberta-v3-large` but unfortunately the notebook kept threw either `Out of Memory Error` or `Notebook Timeout Error`.<br>
+After the failure of the first attempt with `deberta-v3-large`, I tried my best to figure out why it was throwing exception.<br>
+I tried to modify all those hyperparameters, number of layers and etc.<br>
+Later found out that the model was to large that it wouldn’t finish the task within 9 hours (even with the GPU).<br>
+Therefore I had to go with `deberta-v3-base` and it worked great up to max_length = 384, `batch_size = 32`, `num_sentences_include = 20` and `filter_len = 20`.<br>
