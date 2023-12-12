@@ -107,10 +107,28 @@ MCRMSE=\frac{1}{N_t} \sum_{j=1}^{N_t}\left(\frac{1}{n} \sum_{i=1}^n\left(y_{i j}
 
   #### Knowledge Distilation
 - I realized something wrong when I saw the score and thought this is not the way how MobileBERT is implemented in the code.
-- I read the research paper of MobileBERT to find the solution.<br>Then, I realized that a teacher model needed to be taught before implementing MobileBERT, and the teacher model needs to teach MobileBERT.
+- I read the [research paper of MobileBERT](https://arxiv.org/pdf/2004.02984.pdf) to find the solution.<br>Then, I realized that a teacher model needed to be taught before implementing MobileBERT, and the teacher model needs to teach MobileBERT.
 - At first, I didn’t really understand the logic behind it.<br>Still, then I realized that the teacher model was the one containing the information, and MobileBERT only took the necessary information from the previous model (teacher model).
 - The Public Leaderboard score after properly implementing the MobileBERT has been better than before, but it was still unsatisfying.<br>Which led me to revert back to other BERT-descendant models.
 
 <p align="center">
   <img width="700" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/5377adc4-4796-438e-95c1-4d95f5b6b155">
 </p>
+
+
+### All the other models
+- Once the MobileBERT moved out of my scope, I wanted to try all the other available models in this [Dataset](https://www.kaggle.com/datasets/kozodoi/transformers).<br>Which are:
+
+<div align="center">
+
+  | Models | Models |
+  | :-: | :-: |
+  | bert-base-uncased | roberta-base |
+  | bert-large-uncased | roberta-large |
+  | distilroberta-base | t5-base |
+  | distilbert-base-uncased | t5-large |
+  | electra-base-discriminator | xlnet-base-cased |
+  | bart-base | xlnet-large-cased |
+  | bart-large | albert-large-v2 |
+
+</div>
