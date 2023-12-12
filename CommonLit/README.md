@@ -110,6 +110,7 @@ MCRMSE=\frac{1}{N_t} \sum_{j=1}^{N_t}\left(\frac{1}{n} \sum_{i=1}^n\left(y_{i j}
 - I read the research paper of MobileBERT to find the solution.<br>Then, I realized that a teacher model needed to be taught before implementing MobileBERT, and the teacher model needs to teach MobileBERT.
 - At first, I didn’t really understand the logic behind it.<br>Still, then I realized that the teacher model was the one containing the information, and MobileBERT only took the necessary information from the previous model (teacher model).
 - The Public Leaderboard score after properly implementing the MobileBERT has been better than before, but it was still unsatisfying.<br>Which led me to revert back to other BERT-descendant models.
+
 <p align="center">
   <img width="700" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/5377adc4-4796-438e-95c1-4d95f5b6b155">
 </p>
