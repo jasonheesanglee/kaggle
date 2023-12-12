@@ -48,7 +48,7 @@ Merged_Greeks: ABCD format, and after merging, use LabelEncoder to label them, a
 What I overlooked here is that all the column information in the Test Dataset was 0.0, so without any suspicion, I simply created a Merged_Greeks column in the Test Dataset, zooming all values to 0.0.<br>
 Also, the Alpha and Gamma Columns in the Greeks Dataset are just a refinement of the Class information in the Train Dataset, so the CV Score is below 0.1 for most models.<br>
 <p align="center">
-    <img width="250" alt="image" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/8fb7aff8-a137-4ee9-b106-21abbfc59051/c4812fc5-219e-4773-ac50-84130e2f9019/Untitled.png">
+    <img width="250" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/fae5c2b6-b079-4c79-9f45-7038728dda7f">
 </p>
 Although this was a mistake-filled attempt, it led to the realization that we should use the Greeks information to predict the Test Dataset, a realization that has been a cornerstone of our current direction.<br><br>
 Multiple method failures and direction beyond the project period:<br>
