@@ -1,3 +1,5 @@
+![image](https://github.com/jasonheesanglee/kaggle/assets/123557477/25118bbb-04b8-460d-8c1b-b65dea21cf30)
+
 # LLM Science Exam
 2023-07-12 ~ 2023-10-11
 
