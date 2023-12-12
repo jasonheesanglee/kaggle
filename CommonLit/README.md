@@ -61,7 +61,7 @@ MCRMSE=\frac{1}{N_t} \sum_{j=1}^{N_t}\left(\frac{1}{n} \sum_{i=1}^n\left(y_{i j}
   - Converting `---n’t` to `--- not` format.
   - Removing `stopwords`.
 <p align="center">
-  <img width="288" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/aeb8bd20-f578-4097-8068-d4354787bf79">
+  <img width="800" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/4826d742-0829-4aef-bf70-039a5001786d">
 </p>
 
 ### Spell Checking
