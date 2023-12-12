@@ -1,4 +1,4 @@
-![image](https://github.com/jasonheesanglee/kaggle/assets/123557477/bec38521-2723-43f1-a1d7-a304c763bea4)![image](https://github.com/jasonheesanglee/kaggle/assets/123557477/7e29c272-1c61-43f3-9ef2-c152c670f7ae)![image](https://github.com/jasonheesanglee/kaggle/assets/123557477/7c271495-bfff-48de-8663-2e5aebe3b959)
+![image](https://github.com/jasonheesanglee/kaggle/assets/123557477/7c271495-bfff-48de-8663-2e5aebe3b959)
  # CommonLit - Evaluating Students Summary
 2023-07-13 ~ 2023-10-12
 
@@ -139,4 +139,27 @@ However, when I realized that I had to build a new set of code.<br>As it was alr
 
 #### All the other encoder-only models.
 - For other models than BART and T5, I have built a list to store the model location and, retrieved the model's name & location within the train & infer code structure I used for DeBERTa-v3-Base.<br>I understand that it wouldn’t be the best way to try out multiple models in a single structure, but as aforementioned, I did not have enough time to build again from ground zero.<br>After several experiments on Google Colab, I have figured out that `DistilRoBERTa-base` scored the best among the models.<br>Therefore, I have selected the DistilRoBERTa-version of the notebooks as one of my final submissions.
-  
+
+#### LightGBM
+- After getting the result with NLP Deep Learning models, I used LightGBM to improve the score by feature engineering, as introduced in this [notebook](https://www.kaggle.com/code/tsunotsuno/updated-debertav3-lgbm-with-spell-autocorrect/notebook).<br>The original composer of the notebook has found the optimal hyperparameters through their experiment.<br>Still, as I have combined some columns on the way, I needed to find a better hyperparameter that would suit my version of the work.
+- To do so, I added Optuna on LightGBM and ran multiple experiments on Google Colab.<br>This made me think of sending the result to my email, then auto shut-down the session (to save some quota).<br>Details on this are explained in this [notebook](https://www.kaggle.com/code/jasonheesanglee/email-notification-colab-session-autoshutdown).<br>However, it seemed like it didn’t work since the RMSE got higher (worse) than before running LightGBM.<br>Then, I decided not to fix onto one set of hyperparameter values but let the Optuna do its work for the hidden test data.
+
+<p align="center">
+  <img width="500" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/b7ea5264-4b78-4e51-bddd-4c2531a63191">
+</p>
+
+## 1st Place Solution
+- Surprisingly or not, the first-place holder turned out to be using the same baseline that we were using.
+- The differences between our solution and the first-place solution are:<br>
+  1. They have barely modified the logic of the model.
+  2. They not only have used the provided four prompts and generated even more by effectively using Large Language Model.
+  3. They have excluded using LightGBM and solved the problem solely with DeBERTa-v3-Large.
+- Per their discussion, they have spent more time generating new prompts and summaries with LLM than tuning the DeBERTa model.<br>I believe this was quite a smart move, as the competition overview – context has already mentioned utilizing LLM.
+  - Even though I don’t think this is not the way the organizer expected the LLM to be used, they were the only team that actually used LLM for this competition.
+<p align="center">
+  <img width="500" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/e75be711-8dd4-41d1-8768-a9ec91d5e07f">
+  <img width="800" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/33ab8dcd-b84b-43ac-8a5e-2cd629df4e16">
+</p>
+
+
+
