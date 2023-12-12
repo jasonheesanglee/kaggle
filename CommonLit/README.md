@@ -26,7 +26,7 @@ MCRMSE=\frac{1}{N_t} \sum_{j=1}^{N_t}\left(\frac{1}{n} \sum_{i=1}^n\left(y_{i j}
 ## Dataset
 <p align="center">
   <img width="600" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/44f564ec-9153-4ed0-bf6f-2548c576c05d">
-  <img width="350" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/4634e0de-09ee-48cd-b3ec-524737086305">
+  <img width="380" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/4634e0de-09ee-48cd-b3ec-524737086305">
 </p>
 - The organizers have provided 2 different CSV files for each train & test data.
   - **summaries**
@@ -52,7 +52,9 @@ MCRMSE=\frac{1}{N_t} \sum_{j=1}^{N_t}\left(\frac{1}{n} \sum_{i=1}^n\left(y_{i j}
   <img width="800" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/9905a6ce-7f6e-4d8f-bcc5-55bc0c4b20d5">
 </p>
 
-## Preprocessing - Text Cleansing
+## Preprocessing
+
+###Text Cleansing
 - Cleansing the text is a must to run the NLP model effectively.
 - I first brought the `text_processor` module I composed while working on the previous competition.<br>It includes:
   - Regex pattern to replace all the words in all forms of brackets.
@@ -62,4 +64,26 @@ MCRMSE=\frac{1}{N_t} \sum_{j=1}^{N_t}\left(\frac{1}{n} \sum_{i=1}^n\left(y_{i j}
   <img width="288" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/aeb8bd20-f578-4097-8068-d4354787bf79">
 </p>
 
+### Spell Checking
+- After going through the frequently used words on the word cloud,<br>I realized that there were many occasions where the students had misspelled words.<br>For example, many students have written “Pharaoh” as "Pharoh” or “Pharoah”.
+- Considering that the task was to evaluate the summary, I believed that the misspelled words would affect the score.<br>Therefore, I decided not to replace the misspelled words with the correct words.
+<p align="center">
+  <img width="400" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/254be3f4-1c73-41ff-9adb-48d4a593d8c7">
+</p>
 
+- However, after finding out that the competition organizer mentioned that spelling is not the evaluation criteria, I have compared different spell-checking tools with Grammarly to find out which tool performs the best.
+- Then SymSpellPy caught my attention as it was the only tool that correctly replaced “thenwent” with “then went”.
+- The only struggle using SymSpellPy was that it had the slowest processing time among all the tools.<br>Therefore, I have decided to collaborate two tools: PySpellChecker for the misspelled word detecting tool and SymSpellPy as a correction tool.
+- This as well was also included in the controller and changed the configuration per different training experiments.
+
+<div align="center">
+ 
+  | **Tool** | **Detected** | **Correctly Replaced** | **Misjudged** |
+  | :-: | :-: | :-: | :-: |
+  | Grammarly | 16 words | 16 words | Less 1 word |
+  | TextBlob | 20 words | 14 words | 2 words | 2 names |
+  | PySpellChecker | 18 words | 16 words | 2 words |
+  | **SymSpellPy** | **18 words**| **17 words** | **1 name** |
+  | AutoCorrect | 15 words | 12 words | 2 words | 1 name |
+
+</div>
