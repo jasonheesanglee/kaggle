@@ -55,7 +55,7 @@ Multiple method failures and direction beyond the project period:<br>
 → In addition to the LB 3.22 case described above, there were various failure cases.<br>
 There were cases where the LB score did not improve despite adjusting detailed parameter values under the same conditions such as scaling method and model used, so the team introduced and tried new models such as TabPFN and Autogluon compared to the existing models utilized within the team.<br>
 Autogluon yielded similar or poor LB scores.<br>
-TabPFN yielded the best LB Score so far, 0.16, using the method Mr. HeeYoung tried.<br><br>
+TabPFN yielded the best LB Score so far, 0.16, using the method we tried.<br><br>
 
 → Not a failure yet, but am working on a Rule-Based model(?) based on Greeks.
 Not utilizing ML/DL model, relying strictly on EDA to find the rules.<br>
