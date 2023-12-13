@@ -175,4 +175,4 @@ However, when I realized that I had to build a new set of code.<br>As it was alr
   </p>
 - **Second** : Using SymSpellPy for spellchecking.<br>I wouldn’t say this is totally wrong, but most competitors used PySpellCheck and AutoCorrect.<br>It was mainly AutoCorrect.
 - **Third** : Focused too much on MobileBERT.<br>This is more likely to be a self-reflection.<br>I have spent about 2 weeks implementing MobileBERT.<br>Obviously, it has been a great practice for me, but that was it.<br>It didn’t help on scoring.
-- **Fourth** : Need more and better modeling techniques.<br>It would have been better if we could also tried T5 and BART, as no one else was trying that measure.<br>Only if we had a better modeling technique, we could have also tried these two models.
+- **Fourth** : Need more and better modeling techniques.<br>It would have been better if we could have also tried T5 and BART, as no one else was trying that measure.<br>Only if we had a better modeling technique, we could have also tried these two models.
