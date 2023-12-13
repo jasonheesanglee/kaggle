@@ -142,7 +142,7 @@ However, when I realized that I had to build a new set of code.<br>As it was alr
 
 #### LightGBM
 - After getting the result with NLP Deep Learning models, I used LightGBM to improve the score by feature engineering, as introduced in this [notebook](https://www.kaggle.com/code/tsunotsuno/updated-debertav3-lgbm-with-spell-autocorrect/notebook).<br>The original composer of the notebook has found the optimal hyperparameters through their experiment.<br>Still, as I have combined some columns on the way, I needed to find a better hyperparameter that would suit my version of the work.
-- To do so, I added Optuna on LightGBM and ran multiple experiments on Google Colab.<br>This made me think of sending the result to my email, then auto shut-down the session (to save some quota).<br>Details on this are explained in this [notebook](https://www.kaggle.com/code/jasonheesanglee/email-notification-colab-session-autoshutdown).<br>However, it seemed like it didn’t work since the RMSE got higher (worse) than before running LightGBM.<br>Then, I decided not to fix onto one set of hyperparameter values but let the Optuna do its work for the hidden test data.
+- To do so, I added Optuna on LightGBM and ran multiple experiments on Google Colab.<br>This made me think of sending the result to my email, then auto shut-down the session (to save some quota).<br>Details on this are explained in this [notebook](https://www.kaggle.com/code/jasonheesanglee/email-notification-colab-session-autoshutdown).<br>However, it seemed like it didn’t work since the RMSE got higher (worse) than before running LightGBM.<br>Then, I decided not to fix onto one set of hyperparameter values but let the Optuna do its work for the hidden test data.
 
 <p align="center">
   <img width="500" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/b7ea5264-4b78-4e51-bddd-4c2531a63191">
@@ -168,7 +168,8 @@ However, when I realized that I had to build a new set of code.<br>As it was alr
   <img width="1139" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/a7bd18c5-4de0-4c8d-bcdf-38a59645f668">
 - We were expecting at least the top 170, which is the lower limit for the bronze medal.<br>After being depressed for 30 minutes, we started analyzing what have we done wrong.<br>There were quite some reasons we have detected.
 
-- **First** : The proportion of the Public Data.The organizer stated that the test data provided to the competitors is only 13% of the whole test data.<br>Overfitting was unavoidable as we focused on getting a better score on the Public Leaderboard.
+- **First** : The proportion of the Public Data.<br>
+  The organizer stated that the test data provided to the competitors is only 13% of the whole test data.<br>Overfitting was unavoidable as we focused on getting a better score on the Public Leaderboard.
   <p align="center">
     <img width="872" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/edf067d2-f3b3-4523-bc73-24d1a9268ddf">
   </p>
