@@ -1,4 +1,6 @@
-<img width=400 alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/c0effd40-da67-4f29-9b27-6ae2f75b3edc">
+<p align="center">
+   <img width=400 alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/c0effd40-da67-4f29-9b27-6ae2f75b3edc">
+</p>
 
 # AI SPARK Challenge
 23-04-24 ~ 23-05-11<br><br>
