@@ -248,3 +248,177 @@ I was originally 170 out of 180 competitors when I first submitted yesterday, bu
 
 After submitting twice more with different hyperparameters, I realized that the Decision Tree might not be the best-fit solution to this problem.<br>
 So I decided to try with other models.<br>
+<br>
+### Transformer - wav2vec2
+**(Failed - Lack of PyTorch Knowledge)** <br>
+After trying with DT Classifier, I decided to go for the Transformer model.<br>
+It took a bit of research to find which model should I use, and figured out to use the `wav2vec2-large-xlsr-53` by facebook.<br><br>
+
+Here is the codes I modified after searching online.<br>
+```
+model = Wav2Vec2ForSequenceClassification.from_pretrained('facebook/wav2vec2-large-xlsr-53')
+
+train_inputs = torch.tensor(train_x.values.astype(np.float32)).unsqueeze(1)
+test_inputs = torch.tensor(test_x.values.astype(np.float32)).unsqueeze(1)
+
+with torch.no_grad():
+    train_logits = model(train_inputs).logits
+    test_logits = model(test_inputs).logits
+```
+This was code was giving me so much identical error, no matter how much value I input into `.unsqueeze`<br>
+
+So I have deleted the `.unsqueeze` itself.<br>
+(Later found out that my `mfcc` method already took the `batch` into account and didn’t need to `unsqueeze` it in the first place)<br><br>
+After solving this problem, another error was just aroused.<br>
+I have googled, asked ChatGPT, but couldn’t find solution to this problem.<br>
+```
+RuntimeError: Calculated padded input size per channel: (2). Kernel size: (3). Kernel size can't be greater than actual input size
+```
+Instead of moving forward with `wav2vec2-large-xlsr-53`, they recommended me to go with wav2vec2<br>
+It was Pickling Error, which I never encountered before.<br>
+I had to ask Google to solve this problem, and they told me to move all the classes into a separate .py file then import it from there.<br>
+Here is the full code I tried with, but had no luck moving forward from here.<br><br>
+I tried to catch the error by inserting print to every single line in the custom_dataset.py, but it didn’t help.<br>
+As I was lack of the torch knowledge, I decided to pause with the Transformation model, and to try with a different, but better understandable model.<br><br>
+
+### Machine Learning Models
+By using the preprocess data I made before, I am trying various Machine Learning models.<br>
+- **Random Forest Classifier (Success)**
+Below is the code, and I got 160th place with a score of 0.37411<br>
+```
+rf = RandomForestClassifier(n_estimators=50,
+                           max_depth=4,
+                           min_samples_split=2,
+                           max_features=0.85,
+                           n_jobs=-1,
+                           random_state=CFG['SEED'])
+X_train, X_val, y_train, y_val = train_test_split(train_x, train_y, test_size=0.2, random_state=CFG['SEED'])
+print(X_train.shape, X_val.shape, y_train.shape, y_val.shape)
+
+rf.fit(train_x, train_y)
+print("-- Random Forest --")
+print("Train ACC : %.3f" % accuracy_score(y_train, rf.predict(X_train)))
+print("Val ACC : %.3f" % accuracy_score(y_val, rf.predict(X_val)))
+
+------------------------------------------------------------------
+# Output
+
+-- Random Forest --
+Train ACC : 0.423
+Val ACC : 0.431
+
+------------------------------------------------------------------
+
+X_test = pd.get_dummies(data=test_x)
+pred = rf.predict(X_test)
+pred
+
+submission = pd.read_csv(dataset + 'sample_submission.csv')
+submission['label'] = pred
+submission.to_csv(dataset + "baseline_submission.csv", index=False)
+```
+Now I will try with other parameters and other models as well.<br><br>
+
+Then, I decided to use all 4 models I learned during the course.<br>
+As I felt modifying the hyperparameters every single time was too much of work, I added counter to modify all values.<br><br>
+
+As It was so hard to record all the data this `for` loop tried, and to prevent unexpected kernel shutdown, I added a code to automatically save the data to csv file.<br>(Which later created over 10,000 files)<br>
+```
+count = 1
+
+for depth in range(1, 6):
+  for estimator in range(1, 1000):
+    for features in range(1,100):
+      rf = RandomForestClassifier(max_depth=depth,
+                                  n_estimators=estimator,
+                                  min_samples_split=2,
+                                  max_features=features/100,
+                                  n_jobs=-1,
+                                  random_state=CFG['SEED']
+                                  )
+
+      dt = DecisionTreeClassifier(max_depth=depth,
+                                  min_samples_split=2,
+                                  max_features=features/100,
+                                  random_state=CFG['SEED']
+                                  )
+
+      xgboost = XGBClassifier(max_depth=depth,
+                              n_estimators=estimator,
+                              grow_policy='depthwise',
+                              n_jobs=-1,
+                              random_state=CFG['SEED'],
+                              tree_method='auto'
+                              )
+
+      rf.fit(X_train, y_train)
+      dt.fit(X_train, y_train)
+      scaler = StandardScaler()
+      x_trainScaled = scaler.fit_transform(X_train)
+      xgboost.fit(x_trainScaled, y_train)
+      Results = pd.DataFrame([["%.3f" % accuracy_score(y_train, rf.predict(X_train)), "%.3f" % accuracy_score(y_val, rf.predict(X_val))],
+                              ["%.3f" % accuracy_score(y_train, dt.predict(X_train)), "%.3f" % accuracy_score(y_val, dt.predict(X_val))],
+                              ["%.3f" % accuracy_score(y_train, xgboost.predict(X_train)), "%.3f" % accuracy_score(y_val, xgboost.predict(X_val))]],
+                            index = ['Random Forest', "Decision Tree", "XG Boost"]
+                            )
+      get_parameters = pd.DataFrame([rf.get_params(), dt.get_params(), xgboost.get_params()],
+                                    index = ['Random Forest', "Decision Tree", "XG Boost"])
+
+      Results = Results.astype(float)
+      ComResults = pd.concat([Results, get_parameters], axis=1)
+
+      ComResults.to_csv(dataset + f"Results/Results{count}.csv")
+      count += 1
+      print(count)
+```
+After running the loops, I tried to find the best result.<br>
+Based on my understandings, the best result is the result that has the highest `accuracy_score` for both `train` and `validation` sets.<br>
+Therefore, I read all files and found only the sets that had the highest `accuracy_score` every round.<br><br>
+```
+result_files = glob.glob(dataset + "Results/*.csv")
+
+max_temp = []
+for file in result_files:
+    filename = file.split(".")[1]
+    filename = filename.split("/")[2]
+    df = pd.read_csv(file)
+    train_acc = pd.DataFrame(df["0"])
+    val_acc = pd.DataFrame(df["1"])
+    train_max = train_acc.idxmax()
+    val_max = val_acc.idxmax()
+    if train_max[-1] == val_max[-1]:
+        max_temp.append([filename, train_acc.iloc[train_max[-1]][-1], val_acc.iloc[val_max[-1]][-1]])
+
+max_temp_df = pd.DataFrame(max_temp)
+max_temp_df = max_temp_df.rename(columns={0:'filename', 1:"train_acc", 2:"val_acc"})
+```
+With `max_temp_df`, a set of the best scores of each round, I found the highest `accuracy_score` among them again.<br>
+It was to find the top-of-top `accuracy_score` to submit.<br><br>
+
+As the file was the combination of 4 different methods, I had to separate the `fit`, `test` processes per method.<br>
+(I later found out that I was not fully understanding `lgbm`, I had to mute the loop for `lgbm`.)<br><br>
+
+To be precautious for the case where there is no top-of-top accuracy_score in this DataFrame, I added codes to select the best resulted validation_accuracy_score.<br>
+I could also have added another elif or else statement to find train_accuracy_score, but I had no time to work on it as the deadline was only 30 minutes away.<br><br>
+Moreover, as I was not sure if selecting the top-of-top accuracy_score would increase my competition score, I have also added a code to find the bottom-of-bottom accuracy_score.<br><br>
+
+For the final submission, I have used two sets of parameter that resulted top-of-top accuracy_score and one set of parameter that resulted bottom-of-bottom accuracy_score.<br>
+
+Which at last gave me these scores below.<br>
+
+<p align="center">
+  <img width="800" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/c61a9b31-47fd-4787-8f0a-654d7c8010b8">
+  <img width="800" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/940e8da2-980b-487d-9e2f-343d49855daa">
+  <img width="800" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/09522596-086f-4801-a36e-5d116d9bc292">
+</p>
+
+Below is my final Public and Private score.<br>
+
+<p align="center">
+  <img width="600" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/b94d7026-08b2-4a9f-b6b0-d1226f02f662">
+  <img width="600" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/811a364c-502e-4015-bac8-022abdbc038d">
+</p>
+
+I couldn’t even made it to top 10%.<br><br>
+However, this was my first time actually completed not only the preprocess process but the Machine Learning Process as well.<br>
+I already feel that my skills are improved again, and I feel I will do better next time when I join a new competition.<br>
