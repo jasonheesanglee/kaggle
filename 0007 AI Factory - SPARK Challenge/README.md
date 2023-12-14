@@ -555,11 +555,16 @@ def obs_distance(df1, df2):
 It was way more effective than I thought, and it saved a lot of time.<br>
 Then I applied the description to the data I have.<br>
 This worked well, and it seems like I could begin with the next step.<br>
-<img width="705" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/7980c1f3-f36b-4b45-bc42-56c5add6027c">
-<br>
+<p align="center">
+	<img width="705" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/7980c1f3-f36b-4b45-bc42-56c5add6027c">
+</p> <br>
 I have checked the statistical data of these distances.<br>
 As there are 870, 493, and 272 data per distance set, I assumed the range based on the first quartile would cover all PM observatories.<br>
-<img width="707" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/41b0f163-9673-4d2c-a61a-a94a15a869e7">
+
+<p align="center">
+	<img width="707" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/41b0f163-9673-4d2c-a61a-a94a15a869e7">
+</p> <br>
+
 As all PM observatories were included in the chart, we are good to go for the next step.<br>
 To find a trend between two locations, we would need to go over all 5 columns that we are aiming to compare.<br>
 We could go through them one by one, but it was too much work for a simple operation.<br>
