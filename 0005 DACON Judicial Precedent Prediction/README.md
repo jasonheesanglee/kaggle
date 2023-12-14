@@ -1,6 +1,15 @@
 ![header_background](https://github.com/jasonheesanglee/kaggle/assets/123557477/521036f5-5da7-48c0-be4c-765966343de2)
 # Judicial Precident Prediction
 23-05-07 ~ 23-06-05<br>
+
+## Throwback
+This was my first competition that I tried on Natural Language Processing task.<br>
+Even though the result was not that great, I learned a lot from this competition.<br>
+I have understood how the Language model BERT is formed and how to use it.<br>
+Moreover, I have created a basic library for text processing.<br>
+It includes a Python Class that simplifies pandas functions, text processors with regex formats and BERT Tokenizer & Auto Tokenizer.<br>
+Later I found out that using PyTorch could have been way easier to use these tokenizer modules.<br><br>
+
 This competition has just started right after finishing the last competition in Acoustic - Emotion Classification.<br>
 As there were no people competing yet, I tried my best to have the result as fast as I can to take the first place.<br>
 
