@@ -49,7 +49,7 @@ etc.
 ## Approach
 - To perform better on the competitions, the first thing I have done was to take a look on others’ work.<br><br>
 - After going through around 30 notebooks, I realized that many of them were using `T5` as their Main Deep Learning model.<br>
-  Then, I found the [research paper on T5](https://arxiv.org/pdf/1910.10683.pdf) from `arxiv` and started going through it.
+  Then, I found the [research paper on T5](https://arxiv.org/pdf/1910.10683.pdf) from `arxiv` and started [going through](https://github.com/jasonheesanglee/kaggle/blob/main/0002%20LLM%20Science%20Exam/T5_Paper_Notes.pdf) it.
 - While going through the paper, I could understand how this model work and why people chose this model as their main model.<br>
   According to the paper, this model was designed to perform Text-to-Text tasks as an encoder-decoder model, unlikely to the previous model `BERT`, which was an encoder-only model.<br>
   One of the point the researchers pointed out on their paper was that using data from Wikipedia increased the performance on Question Answering tasks.<br>
