@@ -4,7 +4,7 @@
   <a href="https://www.kaggle.com/jasonheesanglee"><img src="https://www.kaggle.com/static/images/site-logo.svg" width="100" /> <img src="https://www.kaggle.com/static/images/tiers/master@192.png" width="50" /> 
 </div>   
 <div align="center">
-  <img src="https://road-to-kaggle-grandmaster.vercel.app/api/badges/jasonheesanglee/dataset" /><img src="https://road-to-kaggle-grandmaster.vercel.app/api/badges/jasonheesanglee/notebook" /><img src="https://road-to-kaggle-grandmaster.vercel.app/api/badges/jasonheesanglee/discussion" />
+  <img src="https://road-to-kaggle-grandmaster.vercel.app/api/badges/jasonheesanglee/competitions" /><img src="https://road-to-kaggle-grandmaster.vercel.app/api/badges/jasonheesanglee/dataset" /><img src="https://road-to-kaggle-grandmaster.vercel.app/api/badges/jasonheesanglee/notebook" /><img src="https://road-to-kaggle-grandmaster.vercel.app/api/badges/jasonheesanglee/discussion" />
 </div>
     
 <br>
