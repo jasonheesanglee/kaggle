@@ -2,7 +2,7 @@
  # CommonLit - Evaluating Students Summary
 <sub>2023-07-13 ~ 2023-10-12<br>
 Group Leader, Group of 5 people.<br>
-Models to emphasize: MobileBERT</sub>
+Model to emphasize: MobileBERT</sub>
 
 ## Competition Overview
 - I participated in the CommonLit – Evaluating Student Summary Competition, where the objective was to develop an automated system for evaluating the quality of summaries written by students in grades 3-12.<br>
