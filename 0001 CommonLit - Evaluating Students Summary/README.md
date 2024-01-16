@@ -1,6 +1,8 @@
 ![image](https://github.com/jasonheesanglee/kaggle/assets/123557477/7c271495-bfff-48de-8663-2e5aebe3b959)
  # CommonLit - Evaluating Students Summary
-2023-07-13 ~ 2023-10-12
+<sub>2023-07-13 ~ 2023-10-12<br>
+Group Leader, Group of 5 people.<br>
+Models to emphasize: MobileBERT</sub>
 
 ## Competition Overview
 - I participated in the CommonLit – Evaluating Student Summary Competition, where the objective was to develop an automated system for evaluating the quality of summaries written by students in grades 3-12.<br>
@@ -11,6 +13,8 @@
   For the previous competition, the names of the first and second parties and brief facts about multiple cases were given, and the competitors had to predict whether the first party had won the case or not.
 - I learned the basics of the NLP technique while competing in the first competition and found my interest in Natural Language Processing.<br>
  Therefore, I have decided to join another NLP competition : CommonLit – Evaluating Student Summary.
+- I have led a group of five people from the YearDream School to study NLP through this competition.
+
 
 ## Scoring Metrics
 - Submissions are scored using MCRMSE, mean column-wise root mean squared error.<br>Where $`𝑁_𝑡`$ is the number of scored ground truth target columns, and 𝑦 and 𝑦̂ are the actual and predicted values, respectively.<br>
