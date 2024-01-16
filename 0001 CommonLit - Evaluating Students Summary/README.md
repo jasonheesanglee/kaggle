@@ -28,6 +28,7 @@ MCRMSE=\frac{1}{N_t} \sum_{j=1}^{N_t}\left(\frac{1}{n} \sum_{i=1}^n\left(y_{i j}
   <img width="600" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/44f564ec-9153-4ed0-bf6f-2548c576c05d">
   <img width="380" alt="image" src="https://github.com/jasonheesanglee/kaggle/assets/123557477/4634e0de-09ee-48cd-b3ec-524737086305">
 </p>
+
 - The organizers have provided 2 different CSV files for each train & test data.
   - **summaries**
     - This file includes below columns:
